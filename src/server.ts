@@ -1,14 +1,8 @@
-import { createServer } from "node:http";
+import app from "./app.js"
 
-const server = createServer((req , res)=>{
-    res.writeHead(200, {
-        "Content-Type" : "text/plain" 
-    });
-
-    res.end("Welcome to RelayX");
-});
+const port = Number(process.env.PORT) || 3000;
 
 
-server.listen(3000 , ()=>{
-    console.log("RelayX is listening on port 3000");
+app.listen(port , ()=>{
+   console.log(`App is running on  port ${port}`);
 });
