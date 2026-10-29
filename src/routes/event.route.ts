@@ -2,7 +2,6 @@ import { Router } from "express";
 import { randomUUID } from "node:crypto";
 import { eventSchema } from "../schemas/event.schema.js";
 import { pool } from "../config/database.js";
-
 const router = Router();
 
 router.post("/", async (req, res) => {
@@ -48,7 +47,6 @@ router.post("/", async (req, res) => {
         });
     }
 });
-
 router.get("/:id" , async(req, res)=>{
    const {id} = req.params;
 
@@ -57,9 +55,7 @@ router.get("/:id" , async(req, res)=>{
    }
    try{
      const query = `select id , event_type , payload from events where id = $1`;
-
      const result = await pool.query(query , [id]);
-
      if(result.rows.length === 0 ){
          return res.status(404).json({
                 error: "EVENT_NOT_FOUND",
@@ -72,7 +68,6 @@ router.get("/:id" , async(req, res)=>{
             error: "EVENT_RETRIEVAL_FAILED",
             message: "Unable to retrieve the event."
         });
-
    }
 });
 
