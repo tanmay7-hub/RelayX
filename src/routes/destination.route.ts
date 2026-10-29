@@ -155,4 +155,12 @@ const destinationId = req.params.id;
     });
   }
 });
+
+router.post("/:id/subscriptions" , async(req , res)=>{
+  try{
+
+  }catch(error){
+
+  }
+});
 export default router;

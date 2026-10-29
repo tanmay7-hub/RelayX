@@ -1,0 +1,19 @@
+###
+
+POST  http://localhost:3000/v1/destinations/cbf9685d-9c51-464c-91ef-7d97b6866db5/subscriptions
+Content-Type: application/json
+
+{
+     "event_type": "order.created"
+}
+
+###
+GET http://localhost:3000/health
+
+###
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+    "event" : "abc"
+}
