@@ -4,8 +4,6 @@ import {Pool} from "pg";
 
 const connectionString = process.env.DATABASE_URL;
 
-
-console.log(connectionString);
 if(!connectionString){
     throw new Error("Database Url is not configured");
 }
