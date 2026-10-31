@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
       });
     }
     const destinationId = randomUUID();
-    const query = `Insert into destination(id , customer_id , url) 
+    const query = `Insert into destinations(id , customer_id , url) 
                     values($1 , $2 , $3)
                     Returning id , customer_id , url , is_active , created_at`;
 
@@ -61,7 +61,7 @@ router.get("/:id" , async(req,res)=>{
         });
       }
       
-      const query = `select id , customer_id , is_active , created_at ,url from destination where id = $1 and customer_id = $2 `;
+      const query = `select id , customer_id , is_active , created_at ,url from destinations where id = $1 and customer_id = $2 `;
       const result = await pool.query(query , [destinationId , customerId]);
 
       if(result.rows.length == 0 ){
@@ -84,7 +84,7 @@ router.get("/:id" , async(req,res)=>{
 router.get("/" , async(req , res)=>{
     const customerId = "00000000-0000-4000-8000-000000000001";
     try{
-        const query = `select id , customer_id , is_active , url , created_at from destination where customer_id = $1 order by created_at`;
+        const query = `select id , customer_id , is_active , url , created_at from destinations where customer_id = $1 order by created_at`;
 
         const result = await pool.query(query ,[customerId]);
 
@@ -104,7 +104,7 @@ router.patch("/:id/disable",async(req , res)=>{
   const destinationId = req.params.id;
   const customerId = "00000000-0000-4000-8000-000000000001";
   try{
-    const query = `UPDATE destination  SET is_active = false where id = $1 
+    const query = `UPDATE destinations  SET is_active = false where id = $1 
                    and customer_id = $2 
                    returning id , customer_id , url , is_active , created_at`;
 
@@ -131,7 +131,7 @@ router.patch("/:id/enable" , async(req , res)=>{
 const destinationId = req.params.id;
   const customerId = "00000000-0000-4000-8000-000000000001";
   try{
-    const query = `UPDATE destination  SET is_active = true where id = $1 
+    const query = `UPDATE destinations  SET is_active = true where id = $1 
                    and customer_id = $2 
                    returning id , customer_id , url , is_active , created_at`;
 
@@ -156,11 +156,11 @@ const destinationId = req.params.id;
   }
 });
 
-router.post("/:id/subscriptions" , async(req , res)=>{
-  try{
+// router.post("/:id/subscriptions" , async(req , res)=>{
+//   try{
 
-  }catch(error){
+//   }catch(error){
 
-  }
-});
+//   }
+// });
 export default router;
